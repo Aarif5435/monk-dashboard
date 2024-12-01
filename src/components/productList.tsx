@@ -186,15 +186,15 @@ export const ProductListComp = () => {
                             </div>
                           </div>
                           {selectedProductList.length !== 1 && (
-                            <div
-                              className={`${
-                                ind === 0
-                                  ? "mt-8"
-                                  : val.variants.length > 0
-                                  ? "-mt-8"
-                                  : ""
-                              } flex items-center cursor-pointer`}
-                            >
+                           <div
+                           className={`${
+                             ind === 0
+                               ? "mt-8"
+                               : val.variants.length > 0
+                               ? "-mt-8"
+                               : ""
+                           } flex items-center cursor-pointer`}
+                         >
                               <RxCross2
                                 onClick={() => {
                                   setSelectedProductList((prev) =>
@@ -297,16 +297,6 @@ export const ProductListComp = () => {
                             )}
                           </Droppable>
                         )}
-                        {ind === selectedProductList.length - 1 && (
-                          <div className="flex justify-end mt-8">
-                            <button
-                              onClick={handleAddProduct}
-                              className="border-2 cursor-pointer text-[#276858] text-sm font-semibold p-3 w-48 rounded border-[#008060]"
-                            >
-                              Add Product
-                            </button>
-                          </div>
-                        )}
                       </div>
                     )}
                   </Draggable>
@@ -315,6 +305,16 @@ export const ProductListComp = () => {
               </div>
             )}
           </Droppable>
+          {
+            <div className="flex justify-end">
+              <button
+                onClick={handleAddProduct}
+                className="border-2 cursor-pointer text-[#276858] text-sm font-semibold p-3 w-48 rounded border-[#008060]"
+              >
+                Add Product
+              </button>
+            </div>
+          }
         </div>
       </DragDropContext>
 
