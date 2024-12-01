@@ -26,13 +26,9 @@ export const fetchProduct = createAsyncThunk(
   "products/fetchProducts",
   async (
     { page, query }: { page: number; query: string },
-    {getState, rejectWithValue }
+    {rejectWithValue }
   ) => {
-    // const state = getState() as { products: ProductState };
-    // const cacheKey = `${query}_${page}`;
-    // if (state.products.cache[cacheKey]) {
-    //   return { data: state.products.cache[cacheKey].data, page, query };
-    // }
+
     try {
       const res = await fetch(
         `https://stageapi.monkcommerce.app/task/products/search?search=${query}&page=${page}&limit=10`,
@@ -74,7 +70,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
         state.loading = false;
-        const {data, page, query} = action.payload;
+        const {data, query} = action.payload;
         if(query.trim() !== ''){
           state.products = data;
           state.hasMore = data.length === 10;
@@ -82,12 +78,6 @@ const productsSlice = createSlice({
           state.products = [...state.products, ...data];
           state.hasMore = data.length === 10;
         }
-       
-        // const cacheKey = `${query}_${page}`;
-        // state.cache[cacheKey] = {
-        //   data,
-        //   hasMore: data.length === 10
-        // }
       })
       .addCase(fetchProduct.rejected, (state, action) => {
         state.loading = false;
